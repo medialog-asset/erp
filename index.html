@@ -5,35 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2026 자산실사 안내 — Medialog</title>
   <style>
-    :root {
-      --gold: #b8924a;
-      --gold-lt: #d4ab6a;
-      --ink: #0b1120;
-      --cream: #faf7f2;
-    }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: var(--cream);
+      background: #faf7f2;
       font-family: sans-serif;
       overflow-x: hidden;
     }
 
-    /* ── 각 섹션 이미지 래퍼 ── */
+    /* 참고 코드와 동일하게 max-width 600px, 중앙 정렬 */
+    .container {
+      max-width: 350px;
+      width: 100%;
+      margin: 0 auto;
+      background: #ffffff;
+    }
+
     .section-img {
       width: 100%;
       display: block;
+      min-height: 60px;
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+      transition: opacity .6s cubic-bezier(.16,1,.3,1),
+                  transform .6s cubic-bezier(.16,1,.3,1);
     }
     .section-img.in {
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* hero는 애니메이션 없이 바로 표시 */
     .section-img.hero-img {
       opacity: 1;
       transform: none;
@@ -44,104 +44,43 @@
       height: auto;
       display: block;
     }
-
-    /* ── CTA 버튼 오버레이 ── */
-    .cta-wrap {
-      position: relative;
-    }
-    .cta-btn-overlay {
-      position: absolute;
-      /* 버튼 위치: CTA 이미지 중앙 하단 */
-      bottom: 28%;
-      left: 50%;
-      transform: translateX(-50%);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 100%);
-      color: var(--ink);
-      font-size: 16px;
-      font-weight: 700;
-      padding: 16px 44px;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 8px 32px rgba(184,146,74,.4);
-      transition: transform .25s, box-shadow .25s, filter .25s;
-      white-space: nowrap;
-      text-decoration: none;
-    }
-    .cta-btn-overlay:hover {
-      transform: translateX(-50%) translateY(-4px) scale(1.02);
-      box-shadow: 0 16px 48px rgba(184,146,74,.55);
-      filter: brightness(1.06);
-    }
-    .cta-btn-overlay:active {
-      transform: translateX(-50%) scale(.98);
-    }
-    .btn-arrow {
-      width: 18px; height: 18px;
-      transition: transform .25s;
-    }
-    .cta-btn-overlay:hover .btn-arrow {
-      transform: translateX(5px);
-    }
-
-    /* ── 로딩 에러 표시 ── */
     img.error {
       background: #f0ebe0;
-      min-height: 80px;
+      min-height: 60px;
     }
   </style>
 </head>
 <body>
 
-  <!-- ① 히어로 -->
-  <div class="section-img hero-img">
-    <img src="https://raw.githubusercontent.com/medialog-asset/main/images/01_hero.png"
-         alt="2026년도 자산실사 안내"
-         onerror="this.classList.add('error')">
-  </div>
+  <div class="container">
 
-  <!-- ② 자산실사란? -->
-  <div class="section-img">
-    <img src="https://raw.githubusercontent.com/medialog-asset/main/images/02_overview.png"
-         alt="자산실사란?"
-         onerror="this.classList.add('error')">
-  </div>
+    <!-- ① 히어로 -->
+    <div class="section-img hero-img">
+      <img src="https://raw.githubusercontent.com/medialog-asset/erp/main/01_hero.png"
+           alt="2026년도 자산실사 안내"
+           onerror="this.classList.add('error')">
+    </div>
 
-  <!-- ③ 주의사항 -->
-  <div class="section-img">
-    <img src="https://raw.githubusercontent.com/medialog-asset/main/images/03_caution.png"
-         alt="주의사항"
-         onerror="this.classList.add('error')">
-  </div>
+    <!-- ② 자산실사란? -->
+    <div class="section-img">
+      <img src="https://raw.githubusercontent.com/medialog-asset/erp/main/02_overview.png"
+           alt="자산실사란?"
+           onerror="this.classList.add('error')">
+    </div>
 
-  <!-- ④ CTA (버튼 오버레이 포함) -->
-  <div class="section-img cta-wrap">
-    <img src="https://raw.githubusercontent.com/medialog-asset/main/images/04_cta.png"
-         alt="자산실사 바로가기"
-         onerror="this.classList.add('error')">
-    <a id="btnGo"
-       class="cta-btn-overlay"
-       href="https://your-domain.com/asset-inspection"
-       target="_blank"
-       rel="noopener">
-      자산실사 바로가기
-      <svg class="btn-arrow" viewBox="0 0 20 20" fill="none"
-           stroke="currentColor" stroke-width="2.2"
-           stroke-linecap="round" stroke-linejoin="round">
-        <line x1="4" y1="10" x2="16" y2="10"/>
-        <polyline points="11 5 16 10 11 15"/>
-      </svg>
-    </a>
+    <!-- ③ 주의사항 -->
+    <div class="section-img">
+      <img src="https://raw.githubusercontent.com/medialog-asset/erp/main/03_caution.png"
+           alt="주의사항"
+           onerror="this.classList.add('error')">
+    </div>
+
   </div>
 
   <script>
   (function () {
     'use strict';
 
-    // 스크롤 시 섹션 페이드인 (hero 제외)
     const revealEls = document.querySelectorAll('.section-img:not(.hero-img)');
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e, i) => {
@@ -150,8 +89,13 @@
           io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0, rootMargin: '0px 0px 200px 0px' });
+
     revealEls.forEach(el => io.observe(el));
+
+    setTimeout(() => {
+      revealEls.forEach(el => el.classList.add('in'));
+    }, 1000);
 
   })();
   </script>
